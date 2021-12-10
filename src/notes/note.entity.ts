@@ -1,14 +1,15 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { IsString, MaxLength, MinLength } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import {BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {IsString, MaxLength, MinLength} from 'class-validator';
+import {ApiProperty} from '@nestjs/swagger';
+import {User} from "../user/entities/user.entity";
 
 @Entity()
 export class Note extends BaseEntity {
   @PrimaryGeneratedColumn()
-  @ApiProperty({ readOnly: true })
+  @ApiProperty({readOnly: true})
   id: number;
 
-  @Column({ length: 150 })
+  @Column({length: 150})
   @MinLength(1)
   @MaxLength(150)
   @IsString()
@@ -23,4 +24,13 @@ export class Note extends BaseEntity {
     description: 'die beschreibung der note',
   })
   description: string;
+
+  @ManyToOne(
+      type => User,
+      user => user.notes,
+  )
+  @ApiProperty({
+    type: () => User,
+  })
+  user: User;
 }

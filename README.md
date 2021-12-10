@@ -53,6 +53,26 @@ npm run db:stop
 
 If you dont want to use Docker you have to setup your own Mysql-Instance with credentials from `ormconfig.json`
 
+### Migrations
+
+Every time after creating new entities or updating old entities it is important that you generate migrations for this
+new entities:
+
+```shell
+npm run migrations:generate
+```
+
+New migrations scripts will then be saved within the `migrations` folder as TIMESTAMP-nestdb.js _(adjust package.json
+npm script to change name)_
+
+-----
+
+After generation (or initially) they have to be applied with:
+
+```shell
+npm run migrations:run
+```
+
 ## Run
 
 You can run the app by executing the following command:
@@ -60,3 +80,10 @@ You can run the app by executing the following command:
 ```
 npm run start:dev
 ```
+
+Resources with CRUD functionality will be available
+at [http://localhost:1337/](http://localhost:1337/) [users/subscriptions/notes]
+
+## Swagger / OpenApi
+
+Open http://localhost:1337/api to access the API documentation

@@ -2,6 +2,7 @@ import {BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn,} from 'ty
 import {ApiProperty} from '@nestjs/swagger';
 import {MaxLength, MinLength} from 'class-validator';
 import {Subscription} from "../../subscription/entities/subscription.entity";
+import {Note} from "../../notes/note.entity";
 
 @Entity()
 export class User extends BaseEntity {
@@ -30,4 +31,14 @@ export class User extends BaseEntity {
         type: () => [Subscription],
     })
     subscriptions: Subscription[];
+
+    @OneToMany(
+        type => Note,
+        note => note.user,
+        {cascade: ['insert', 'update']},
+    )
+    @ApiProperty({
+        type: () => [Note],
+    })
+    notes: Note[];
 }
