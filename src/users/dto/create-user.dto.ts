@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Subscription } from '../../subscription/entities/subscription.entity';
+import { Subscription } from '../../subscriptions/entities/subscription.entity';
 
 export class CreateUserDto {
   @ApiProperty()

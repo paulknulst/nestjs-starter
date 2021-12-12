@@ -1,12 +1,12 @@
 import {BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn,} from 'typeorm';
 import {ApiProperty} from '@nestjs/swagger';
-import {User} from "../../user/entities/user.entity";
+import {User} from "../../users/entities/user.entity";
 
 @Entity()
 export class Subscription extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   @ApiProperty({readOnly: true})
-  uid: number;
+  uid: string;
 
   @Column({type: 'simple-array', nullable: true})
   @ApiProperty({type: [String]})

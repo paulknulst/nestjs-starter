@@ -20,15 +20,15 @@ export class UsersService {
         return await this.userRepository.find();
     }
 
-    async findOne(id: number) {
-        return await this.userRepository.findOne(id);
+    async findOne(uid: string) {
+        return await this.userRepository.findOne(uid);
     }
 
-    async update(id: number, updateUserDto: UpdateUserDto) {
-        const updateUser = await this.userRepository.findOne(id);
+    async update(uid: string, updateUserDto: UpdateUserDto) {
+        const updateUser = await this.userRepository.findOne(uid);
 
         if (!updateUser) {
-            throw new NotFoundException('cannot find user');
+            throw new NotFoundException('cannot find users');
         }
 
         updateUser.name = updateUserDto.name;
@@ -38,7 +38,7 @@ export class UsersService {
         return updateUser;
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} user`;
+    remove(uid: string) {
+        return `This action removes a #${uid} user`;
     }
 }

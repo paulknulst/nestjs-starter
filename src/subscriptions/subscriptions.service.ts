@@ -17,23 +17,23 @@ export class SubscriptionsService {
     return await this.subscriptionsRepository.find();
   }
 
-  findOne(id: string) {
-    return this.subscriptionsRepository.findOne(id, {relations: ['user']});
+  findOne(uid: string) {
+    return this.subscriptionsRepository.findOne(uid, {relations: ['user']});
   }
 
   async create(createSubscriptionDto: CreateSubscriptionDto) {
     return this.subscriptionsRepository.save(createSubscriptionDto);
   }
 
-  async remove(id: string): Promise<void> {
-    await this.subscriptionsRepository.delete(id);
+  async remove(uid: string): Promise<void> {
+    await this.subscriptionsRepository.delete(uid);
   }
 
   async update(
-      id: number,
+      uid: string,
       updateSubscriptionDto: UpdateSubscriptionDto,
   ): Promise<Subscription> {
-    const updateSubscription = await this.subscriptionsRepository.findOne(id);
+    const updateSubscription = await this.subscriptionsRepository.findOne(uid);
     if (!updateSubscription) {
       throw new NotFoundException('Subscription is not found');
     }

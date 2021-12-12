@@ -1,13 +1,13 @@
 import {BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
 import {IsString, MaxLength, MinLength} from 'class-validator';
 import {ApiProperty} from '@nestjs/swagger';
-import {User} from "../user/entities/user.entity";
+import {User} from "../users/entities/user.entity";
 
 @Entity()
 export class Note extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   @ApiProperty({readOnly: true})
-  id: number;
+  uid: string;
 
   @Column({length: 150})
   @MinLength(1)

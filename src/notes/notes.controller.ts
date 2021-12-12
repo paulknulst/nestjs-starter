@@ -1,22 +1,14 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
-import { ParseIntPipe } from '@nestjs/common/pipes/parse-int.pipe';
-import { Note } from './note.entity';
-import { NotesService } from './notes.service';
-import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import {Body, Controller, Delete, Get, Param, Patch, Post,} from '@nestjs/common';
+import {Note} from './note.entity';
+import {NotesService} from './notes.service';
+import {ApiBearerAuth, ApiCreatedResponse, ApiTags} from '@nestjs/swagger';
 
 @ApiBearerAuth()
 @ApiTags('notes')
 @Controller('notes')
 export class NotesController {
-  constructor(private notesService: NotesService) {}
+  constructor(private notesService: NotesService) {
+  }
 
   @Get()
   findAll() {
@@ -24,8 +16,8 @@ export class NotesController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id) {
-    return this.notesService.findOne(id);
+  findOne(@Param('id') uid) {
+    return this.notesService.findOne(uid);
   }
 
   @Post()
@@ -38,12 +30,12 @@ export class NotesController {
   }
 
   @Patch(':id')
-  async editNote(@Body() note: Note, @Param('id') id: number): Promise<Note> {
-    return await this.notesService.editNote(id, note);
+  async editNote(@Body() note: Note, @Param('id') uid: number): Promise<Note> {
+    return await this.notesService.editNote(uid, note);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id) {
-    this.notesService.remove(id);
+  async remove(@Param('id') uid) {
+    await this.notesService.remove(uid);
   }
 }

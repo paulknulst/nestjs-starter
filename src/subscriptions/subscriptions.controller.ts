@@ -18,8 +18,8 @@ export class SubscriptionsController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id) {
-    return this.subscriptionsService.findOne(id);
+  findOne(@Param('id') uid) {
+    return this.subscriptionsService.findOne(uid);
   }
 
   @Post()
@@ -34,13 +34,13 @@ export class SubscriptionsController {
   @Patch(':id')
   async update(
       @Body() updateSubscriptionDto: UpdateSubscriptionDto,
-      @Param('id') id: number,
+      @Param('id') uid: string,
   ) {
-    return await this.subscriptionsService.update(id, updateSubscriptionDto);
+    return await this.subscriptionsService.update(uid, updateSubscriptionDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id) {
-    await this.subscriptionsService.remove(id);
+  async remove(@Param('id') uid) {
+    await this.subscriptionsService.remove(uid);
   }
 }

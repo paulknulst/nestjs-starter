@@ -6,13 +6,17 @@ import {NotesModule} from './notes/notes.module';
 import {AuthMiddleware} from './auth/auth.middleware';
 import {NotesController} from './notes/notes.controller';
 import {AdminauthMiddleware} from './auth/adminauth.middleware';
-import {SubscriptionsController} from './subscription/subscriptions.controller';
-import {SubscriptionsModule} from './subscription/subscriptions.module';
-import {UsersModule} from './user/users.module';
-import {UsersController} from "./user/users.controller";
+import {SubscriptionsController} from './subscriptions/subscriptions.controller';
+import {SubscriptionsModule} from './subscriptions/subscriptions.module';
+import {UsersModule} from './users/users.module';
+import {UsersController} from "./users/users.controller";
+import {ModulesModule} from './modules/modules.module';
+import {GraphQLModule} from "@nestjs/graphql";
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), NotesModule, SubscriptionsModule, UsersModule],
+  imports: [TypeOrmModule.forRoot(), NotesModule, SubscriptionsModule, UsersModule, ModulesModule, GraphQLModule.forRoot({
+    autoSchemaFile: 'schema.gql',
+  })],
   controllers: [AppController],
   providers: [AppService],
 })

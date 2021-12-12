@@ -1,14 +1,14 @@
 import {BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn,} from 'typeorm';
 import {ApiProperty} from '@nestjs/swagger';
 import {MaxLength, MinLength} from 'class-validator';
-import {Subscription} from "../../subscription/entities/subscription.entity";
+import {Subscription} from "../../subscriptions/entities/subscription.entity";
 import {Note} from "../../notes/note.entity";
 
 @Entity()
 export class User extends BaseEntity {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     @ApiProperty({readOnly: true})
-    uid: number;
+    uid: string;
 
     @ApiProperty()
     @Column({length: 150})
