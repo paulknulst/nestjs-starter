@@ -17,8 +17,11 @@ export class AuthService {
                 if (bcrypt.compareSync(password, user.password)) {
                     return {
                         username: user.name,
+                        // SIGNING HERE is important for validate function with jwt.strategy.ts
+                        // see: async validate(payload: any)
+                        // have to be the same structure!
                         access_token: this.jwtService.sign({
-                            user: {id: user.uid, username: user.name}
+                            sub: user.uid, username: user.name
                         })
                     };
                 } else {
