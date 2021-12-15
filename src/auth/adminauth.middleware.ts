@@ -23,7 +23,7 @@ export class AdminauthMiddleware implements NestMiddleware {
       return;
     }
 
-    if (idToken === 'supersicher2') {
+    if (idToken === 'supersafe2') {
       next();
       return;
     } else {

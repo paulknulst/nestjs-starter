@@ -3,26 +3,36 @@ import {TypeOrmModule} from '@nestjs/typeorm/dist/typeorm.module';
 import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {NotesModule} from './notes/notes.module';
-import {AuthMiddleware} from './auth/auth.middleware';
-import {NotesController} from './notes/notes.controller';
 import {AdminauthMiddleware} from './auth/adminauth.middleware';
-import {SubscriptionsController} from './subscriptions/subscriptions.controller';
 import {SubscriptionsModule} from './subscriptions/subscriptions.module';
 import {UsersModule} from './users/users.module';
 import {UsersController} from "./users/users.controller";
 import {ModulesModule} from './modules/modules.module';
 import {GraphQLModule} from "@nestjs/graphql";
+import {AuthModule} from './auth/auth.module';
+import {APP_GUARD} from "@nestjs/core";
+import {JwtAuthGuard} from "./auth/jwt-auth.guard";
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), NotesModule, SubscriptionsModule, UsersModule, ModulesModule, GraphQLModule.forRoot({
-    autoSchemaFile: 'schema.gql',
-  })],
+  imports: [
+    NotesModule,
+    AuthModule,
+    SubscriptionsModule,
+    UsersModule,
+    ModulesModule,
+    TypeOrmModule.forRoot(),
+    GraphQLModule.forRoot({
+      autoSchemaFile: 'schema.gql',
+    })
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, {
+    provide: APP_GUARD,
+    useClass: JwtAuthGuard,
+  },],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
-    consumer.apply(AuthMiddleware).forRoutes(NotesController);
-    consumer.apply(AdminauthMiddleware).forRoutes(SubscriptionsController, UsersController);
+    consumer.apply(AdminauthMiddleware).forRoutes(UsersController);
   }
 }

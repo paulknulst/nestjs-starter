@@ -4,6 +4,7 @@ import {CreateUserDto} from './dto/create-user.dto';
 import {UpdateUserDto} from './dto/update-user.dto';
 import {ApiBearerAuth, ApiCreatedResponse, ApiTags} from '@nestjs/swagger';
 import {User} from './entities/user.entity';
+import {Public} from "../public.decorator";
 
 @ApiBearerAuth()
 @ApiTags('user')
@@ -12,6 +13,7 @@ export class UsersController {
   constructor(private readonly userService: UsersService) {
   }
 
+  @Public()
   @Post()
   @ApiCreatedResponse({
     description: 'creates a new users',

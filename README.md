@@ -87,3 +87,16 @@ at [http://localhost:1337/](http://localhost:1337/) [users/subscriptions/notes]
 ## Swagger / OpenApi
 
 Open http://localhost:1337/api to access the API documentation
+
+
+# REST
+
+"Register" a user (user bearer within `src/auth/adminauth.middleware.ts` - supersafe2)
+```shell
+curl -X POST http://localhost:1337/user -d '{"name": "admin", "password": "admin", "gender" : "m"}' -H "Authorization: Bearer supersafe2" -H "Content-Type: application/json"
+```
+
+"Login" using /auth/login
+```shell
+curl -X POST http://localhost:1337/auth/login -d '{"username": "admin", "password": "admin"}' -H "Content-Type: application/json"
+```

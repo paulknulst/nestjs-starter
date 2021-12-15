@@ -1,9 +1,10 @@
-import {Body, Controller, Delete, Get, Param, Patch, Post,} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Patch, Post, UseGuards,} from '@nestjs/common';
 import {ParseIntPipe} from '@nestjs/common/pipes/parse-int.pipe';
 import {SubscriptionsService} from './subscriptions.service';
 import {ApiBearerAuth, ApiCreatedResponse, ApiTags} from '@nestjs/swagger';
 import {CreateSubscriptionDto} from "./dto/create-subscription.dto";
 import {UpdateSubscriptionDto} from "./dto/update-subscription.dto";
+import {JwtAuthGuard} from "../auth/jwt-auth.guard";
 
 @Controller('subscriptions')
 @ApiTags('subscriptions')

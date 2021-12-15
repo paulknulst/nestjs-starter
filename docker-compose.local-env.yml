@@ -1,12 +1,13 @@
 version: "3.9"
 
 services:
-  sqldb:
+  app_db:
     image: mysql:5.7
     volumes:
       - ./sqldb:/var/lib/mysql
     hostname: sqldb
     ports:
+      # THIS PORT IS ONLY USED IN DEVELOPMENT!!
       - "3306:3306"
     restart: always
     environment:

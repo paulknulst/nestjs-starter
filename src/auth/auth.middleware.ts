@@ -23,7 +23,7 @@ export class AuthMiddleware implements NestMiddleware {
       return;
     }
 
-    if (idToken === 'supersicher') {
+    if (idToken === 'supersafe') {
       next();
       return;
     } else {

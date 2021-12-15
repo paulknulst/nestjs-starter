@@ -6,6 +6,8 @@ export class CreateUserDto {
   name: string;
   @ApiProperty()
   gender: string;
+  @ApiProperty()
+  password: string;
   @ApiProperty({
     type: () => [Subscription],
   })

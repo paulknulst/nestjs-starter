@@ -10,6 +10,10 @@ export class User extends BaseEntity {
     @ApiProperty({readOnly: true})
     uid: string;
 
+    // select: false means that this field wont be returned by default
+    @Column({select: false})
+    password: string;
+
     @ApiProperty()
     @Column({length: 150})
     @MinLength(1)
