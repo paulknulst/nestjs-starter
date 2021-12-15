@@ -100,3 +100,8 @@ curl -X POST http://localhost:1337/user -d '{"name": "admin", "password": "admin
 ```shell
 curl -X POST http://localhost:1337/auth/login -d '{"username": "admin", "password": "admin"}' -H "Content-Type: application/json"
 ```
+
+Retrieve profile lol
+```shell
+curl http://localhost:1337/profile -H "Authorization: Bearer HERE_TOKEN_FROM_LOGIN_CALL"
+```
